@@ -1,7 +1,7 @@
 # ./polytts.sh <inputfile with extension> <output file without extension>
 
 outputfile=$2
-textinput=$1
+textinput=$(<$1)
 
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=

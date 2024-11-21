@@ -1,8 +1,8 @@
-TEMPHUM="$(./dht22.out)"
-IFS=' - ' read -r TEMP HUMIDITY <<< "$TEMPHUM"
+#! /bin/bash
 
-if [[ $TEMPHUM == *"x_x"* ]]; then
-  asl-tts -n 1000 -t "Unable to read the temperature. Please try again in a minute" -v "en_US-kathleen-low.onnx"
-else
-  asl-tts -n 1000 -t "Internal Temperature is ${TEMP:0:4} degrees fahrenheit." -v "en_US-kathleen-low.onnx"
-fi
+# Get and parse data from DHT22
+temphum=$(/etc/asterisk/scripts/dht22.out)
+IFS=' - ' read -r TEMP HUMIDITY <<< "$temphum"
+
+# Speak output
+/usr/bin/asl-tts -n 1000 -t "Repeater cabinet internal temperature is ${TEMP:0:4} degrees fahrenheit." -v "en_US-kathleen-low.onnx"
